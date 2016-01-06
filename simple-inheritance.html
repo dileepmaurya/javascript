@@ -1,0 +1,53 @@
+<<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Simple javascript inheritance
+    </title>
+</head>
+<body>
+  <script type="text/javascript">
+    var ClassA = function(){
+      this.name = "ClassA";
+    }
+
+    ClassA.prototype = {
+      setName: function(name){
+        this.name = name;
+      },
+      getName : function(){
+        console.log('Parent Class');
+        return this.name;
+      }
+    }
+
+    var ClassB = function(){
+      this.name = 'ClassB';
+    }
+
+    ClassB.prototype = Object.create(ClassA.prototype);
+
+    ClassB.prototype.getName = function(){
+        ClassA.prototype.getName.call(this); 
+        console.log('Child Class');
+        return this.name;
+    }
+
+    var ClassC = function(){
+      this.name = 'ClassC';
+    }
+
+    ClassC.prototype = Object.create(ClassB.prototype);
+
+    ClassC.prototype.getName = function(){
+        ClassB.prototype.getName.call(this); 
+        console.log('Grandchild Class');
+        return this.name;
+    }
+
+    var obj = new ClassC();
+    obj.getName(); 
+
+  </script>
+</body
+</html>
